@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Progress Portal | FitForge Personal Training</title>
+  <meta name="description" content="Track your FitForge personal training sessions, workout progress, and body composition milestones." />
+  <link rel="stylesheet" href="css/glass.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <div class="ambient-glow"></div>
+  <div class="nav-wrapper">
+    <nav class="nav-bar" aria-label="Portal Navigation">
+      <a href="index.html" class="nav-logo">
+        <span class="nav-logo-main">FITFORGE</span>
+        <span class="nav-logo-sub">PERSONAL TRAINING &amp; COACHING</span>
+      </a>
+      <div class="nav-actions">
+        <a href="booking.html" class="btn btn-gold btn-sm">+ Book Session</a>
+        <a href="index.html" class="btn btn-glass btn-sm">← Back to Website</a>
+      </div>
+    </nav>
+  </div>
+
+  <main class="container" style="padding-top: 8.5rem; padding-bottom: 5rem;">
+    <span class="eyebrow">FitForge Athlete Portal</span>
+    <h1 style="font-size: 2.8rem; margin-bottom: 2rem;">Your Training &amp; Progress Dashboard</h1>
+
+    <div class="dashboard-metrics-grid">
+      <div class="metric-card">
+        <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Weight Progress</div>
+        <div class="metric-val">82 kg → 74 kg</div>
+        <div style="font-size:0.82rem; color:var(--gold-light); margin-top:0.4rem;">−8 kg (12-Week Block)</div>
+      </div>
+      <div class="metric-card">
+        <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Compound Strength</div>
+        <div class="metric-val">60 kg → 90 kg</div>
+        <div style="font-size:0.82rem; color:var(--gold-light); margin-top:0.4rem;">+50% Bench Press PR</div>
+      </div>
+      <div class="metric-card">
+        <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Consistency</div>
+        <div class="metric-val">64% → 91%</div>
+        <div style="font-size:0.82rem; color:var(--gold-light); margin-top:0.4rem;">3 Sessions / Week</div>
+      </div>
+      <div class="metric-card">
+        <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Coach</div>
+        <div class="metric-val" style="font-size: 1.65rem;">Alex Mercer</div>
+        <div style="font-size:0.82rem; color:var(--text-muted); margin-top:0.4rem;">Weekly Check-In Active</div>
+      </div>
+    </div>
+
+    <div class="glass-card" style="padding: 2.2rem;">
+      <h2 style="font-size: 1.7rem; margin-bottom: 1.2rem;">Scheduled Coaching Sessions</h2>
+      <div id="dashboardBookingsMount"></div>
+    </div>
+  </main>
+
+  <script src="js/siteContent.js"></script>
+  <script src="js/bookingService.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

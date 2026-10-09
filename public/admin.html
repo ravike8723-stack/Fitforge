@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coach Administration | FitForge Personal Training</title>
+  <meta name="description" content="FitForge Personal Training Coach Administration & Client Roster Portal." />
+  <link rel="stylesheet" href="css/glass.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+  <div class="ambient-glow"></div>
+  <div class="nav-wrapper">
+    <nav class="nav-bar" aria-label="Coach Admin Navigation">
+      <a href="index.html" class="nav-logo">
+        <span class="nav-logo-main">FITFORGE</span>
+        <span class="nav-logo-sub">COACH ADMINISTRATION</span>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn btn-primary btn-sm">← Live Website</a>
+      </div>
+    </nav>
+  </div>
+
+  <main class="container" style="padding-top: 8.5rem; padding-bottom: 5rem;">
+    <span class="eyebrow">Head Coach Console</span>
+    <h1 style="font-size: 2.8rem; margin-bottom: 2rem;">FitForge Coaching Roster &amp; Consultations</h1>
+
+    <div class="glass-card" style="padding: 2.2rem;">
+      <h2 style="font-size: 1.7rem; margin-bottom: 1.2rem;">Active Client Bookings</h2>
+      <div id="adminBookingsMount"></div>
+    </div>
+  </main>
+
+  <script src="js/siteContent.js"></script>
+  <script src="js/bookingService.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

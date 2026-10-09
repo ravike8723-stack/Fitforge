@@ -1,0 +1,33 @@
+/*
+ * styles.css
+ *
+ * FitForge Black + Red Athletic Theme Tokens
+ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --bg-main: #000000;
+  --bg-card: #111111;
+  --bg-alt: #1A1A1A;
+  --bg-dark: #000000;
+  --text-primary: #FFFFFF;
+  --text-muted: #777777;
+  --text-light: #FFFFFF;
+  --red-primary: #FF0000;
+  --red-hover: #E60000;
+  --border-subtle: #2A2A2A;
+  --font-heading: 'Oswald', system-ui, sans-serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}

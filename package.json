@@ -1,0 +1,19 @@
+{
+  "name": "fitforge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FitForge — Personal Training & Online Coaching Platform",
+  "scripts": {
+    "build": "node scripts/verifyBuild.js",
+    "test": "node scripts/verifyBuild.js",
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "fitness",
+    "personal-trainer",
+    "coaching",
+    "fitforge"
+  ],
+  "author": "FitForge",
+  "license": "UNLICENSED"
+}

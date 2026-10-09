@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitForge | Personal Training &amp; Online Coaching</title>
+  <meta name="description" content="Personalized strength training, conditioning and coaching designed around your goals, your body and your lifestyle.">
+  <meta property="og:title" content="FitForge — Build The Strongest Version Of You">
+  <meta property="og:description" content="Serious personal training for people who want serious results.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/hero-trainer.jpg">
+  <link rel="stylesheet" href="css/glass.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <div class="ambient-glow"></div>
+
+  <!-- =====================================================================
+       NAVIGATION BAR
+       ===================================================================== -->
+  <header class="nav-wrapper">
+    <nav class="nav-bar" aria-label="Primary Navigation">
+      <a class="nav-logo" onclick="app.navigateTo('home')" tabindex="0" role="button" aria-label="FitForge Home">
+        <span class="nav-logo-main">FIT<span>FORGE</span></span>
+        <span class="nav-logo-sub">Personal Training &amp; Coaching</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a class="nav-link active" data-nav="home" onclick="app.navigateTo('home')">Home</a></li>
+        <li><a class="nav-link" data-nav="about" onclick="app.navigateTo('about')">About</a></li>
+        <li><a class="nav-link" data-nav="programs" onclick="app.navigateTo('programs')">Programs</a></li>
+        <li><a class="nav-link" data-nav="results" onclick="app.navigateTo('results')">Results</a></li>
+        <li><a class="nav-link" data-nav="training" onclick="app.navigateTo('training')">Training</a></li>
+        <li><a class="nav-link" data-nav="testimonials" onclick="app.navigateTo('testimonials')">Testimonials</a></li>
+        <li><a class="nav-link" data-nav="faq" onclick="app.navigateTo('faq')">FAQ</a></li>
+        <li><a class="nav-link" data-nav="contact" onclick="app.navigateTo('contact')">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <div id="guestActions" class="desktop-auth" style="display:flex; gap:0.5rem; align-items:center;">
+          <button class="btn btn-outline btn-sm" onclick="app.openClientPortal()">CLIENT PORTAL</button>
+        </div>
+
+        <div id="userActions" class="desktop-auth" style="display:none; gap:0.5rem; align-items:center;">
+          <button class="btn btn-outline btn-sm" id="portalBtn" onclick="app.switchView('portal')">CLIENT PORTAL</button>
+          <button class="btn btn-outline btn-sm" id="adminBtn" style="display:none; border-color:var(--red-primary); color:var(--red-primary);" onclick="app.switchView('admin')">COACH ADMIN</button>
+          <button class="btn btn-outline btn-sm" onclick="authManager.logout()">SIGN OUT</button>
+        </div>
+
+        <button class="btn btn-red btn-sm" onclick="app.navigateTo('consultation')">BOOK A FREE CONSULTATION</button>
+        <button class="mobile-menu-btn" onclick="app.toggleMobileDrawer()" aria-label="Open Navigation Menu">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- =====================================================================
+       MAIN LANDING PAGE VIEW
+       ===================================================================== -->
+  <div id="homeView" class="app-view-panel active">
+    <main>
+
+      <!-- 1. HERO SECTION -->
+      <section class="hero-section" id="home">
+        <div class="container">
+          <div class="hero-grid">
+            <div>
+              <span class="eyebrow">PERSONAL TRAINING • PERFORMANCE • RESULTS</span>
+              <h1 class="hero-title">
+                BUILD THE<br>
+                <span class="highlight-red">STRONGEST</span><br>
+                VERSION OF YOU.
+              </h1>
+              <p class="hero-subtitle">
+                Personalized strength training, conditioning and coaching designed around your goals, your body and your lifestyle.
+              </p>
+
+              <div class="hero-cta-row">
+                <button class="btn btn-red" onclick="app.navigateTo('consultation')">
+                  BOOK A FREE CONSULTATION
+                </button>
+                <button class="btn btn-outline" onclick="app.navigateTo('programs')">
+                  VIEW PROGRAMS
+                </button>
+              </div>
+            </div>
+
+            <div class="hero-visual-stack">
+              <div class="hero-image-wrap">
+                <img src="images/hero-trainer.jpg" alt="FitForge Personal Trainer in high-contrast studio">
+              </div>
+
+              <!-- Floating Statistics Card -->
+              <div class="hero-stats-floating" id="heroStatsCard">
+                <div class="hero-stat-cell">
+                  <div class="hero-stat-num">100+</div>
+                  <div class="hero-stat-lbl">CLIENTS TRANSFORMED</div>
+                </div>
+                <div class="hero-stat-cell">
+                  <div class="hero-stat-num">5+</div>
+                  <div class="hero-stat-lbl">YEARS EXPERIENCE</div>
+                </div>
+                <div class="hero-stat-cell">
+                  <div class="hero-stat-num">CERTIFIED</div>
+                  <div class="hero-stat-lbl">PERSONAL TRAINER</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. ABOUT SECTION (CONCISE + RED VERTICAL ACCENT) -->
+      <section id="about">
+        <div class="container">
+          <div class="about-grid">
+            <div class="coach-photo-frame">
+              <img src="images/trainer-portrait.jpg" alt="Coach Alex Mercer — Certified Personal Trainer" loading="lazy">
+            </div>
+
+            <div>
+              <span class="eyebrow">ABOUT THE COACH</span>
+              <h2 class="section-title">MEET YOUR COACH</h2>
+
+              <div class="about-red-accent-block" id="coachBioContainer"></div>
+
+              <div class="proof-badges-row" id="coachProofRow"></div>
+
+              <button class="btn btn-red" onclick="app.navigateTo('consultation')">
+                MEET THE COACH
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. INTERACTIVE GOAL FINDER ("WHAT'S YOUR GOAL?") -->
+      <section id="goals" class="section-alt">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="eyebrow">GOAL FINDER</span>
+            <h2 class="section-title">WHAT'S YOUR GOAL?</h2>
+            <p>Choose your primary goal and discover the right training approach.</p>
+          </div>
+
+          <div class="goals-grid" id="goalsGrid"></div>
+
+          <!-- Compact Recommendation Panel -->
+          <div class="goal-recommendation-banner" id="goalRecommendationBanner"></div>
+        </div>
+      </section>
+
+      <!-- 4. PROGRAMS SECTION (3 MAIN PROGRAMS + COMPACT DETAIL PANEL) -->
+      <section id="programs">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="eyebrow">TRAINING PROGRAMS</span>
+            <h2 class="section-title">BUILT FOR SERIOUS PROGRESS</h2>
+            <p>Select a program to inspect structure, sessions, and pricing.</p>
+          </div>
+
+          <div class="programs-grid" id="programsGrid"></div>
+
+          <!-- Compact Selected Program Detail Panel -->
+          <div class="program-detail-drawer" id="programDetailDrawer"></div>
+        </div>
+      </section>
+
+      <!-- 5. TRAINING EXPERIENCE (6 COMPACT INTERACTIVE CATEGORIES) -->
+      <section id="training" class="section-alt">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="eyebrow">TRAINING EXPERIENCE</span>
+            <h2 class="section-title">HOW WE TRAIN</h2>
+          </div>
+
+          <div class="training-tabs-row" id="trainingTabsRow" role="tablist"></div>
+
+          <div class="training-panel" id="trainingContentPanel"></div>
+        </div>
+      </section>
+
+      <!-- 6. RESULTS SECTION ("REAL PEOPLE. REAL RESULTS.") -->
+      <section id="results">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="eyebrow">PROVEN OUTCOMES</span>
+            <h2 class="section-title">REAL PEOPLE. <span class="text-red">REAL RESULTS.</span></h2>
+          </div>
+
+          <div class="results-grid" id="resultsGrid"></div>
+
+          <p style="text-align:center; font-size:0.78rem; color:var(--text-muted); margin-top:1.25rem;">
+            Results vary by individual.
+          </p>
+        </div>
+      </section>
+
+      <!-- 7. NUTRITION / HABITS SECTION (4 COMPACT CARDS) -->
+      <section id="nutrition" class="section-alt">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="eyebrow">FUEL &amp; ACCOUNTABILITY</span>
+            <h2 class="section-title">TRAINING IS ONLY PART OF THE EQUATION.</h2>
+          </div>
+
+          <div class="nutrition-4-grid" id="nutritionGrid"></div>
+        </div>
+      </section>
+
+      <!-- 8. TESTIMONIALS SECTION (SHORT & PUNCHY) -->
+      <section id="testimonials">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="eyebrow">CLIENT FEEDBACK</span>
+            <h2 class="section-title">WHAT ATHLETES SAY</h2>
+          </div>
+
+          <div class="testimonials-grid" id="testimonialsGrid"></div>
+        </div>
+      </section>
+
+      <!-- 9. COMPACT FAQ -->
+      <section id="faq" class="section-alt">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="eyebrow">FAQ</span>
+            <h2 class="section-title">COMMON QUESTIONS</h2>
+          </div>
+
+          <div class="faq-list" id="faqContainer"></div>
+        </div>
+      </section>
+
+      <!-- 10. CONSULTATION / BOOKING SECTION ("READY TO GET STRONGER?") -->
+      <section id="consultation">
+        <div class="container">
+          <div class="section-header-center">
+            <span class="eyebrow">FREE 1-ON-1 CONSULTATION</span>
+            <h2 class="section-title">READY TO GET <span class="text-red">STRONGER?</span></h2>
+            <p>Tell us where you are now and where you want to go.</p>
+          </div>
+
+          <div class="consultation-card">
+            <form id="consultationForm" onsubmit="app.submitConsultationForm(event)">
+              <div class="form-grid-3">
+                <div class="form-group">
+                  <label class="form-label" for="consultName">Full Name *</label>
+                  <input type="text" id="consultName" class="form-control" placeholder="Alex Rivera" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="consultEmail">Email *</label>
+                  <input type="email" id="consultEmail" class="form-control" placeholder="alex@example.com" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="consultPhone">Phone *</label>
+                  <input type="tel" id="consultPhone" class="form-control" placeholder="+1 (415) 555-0192" required>
+                </div>
+              </div>
+
+              <div class="form-grid-3">
+                <div class="form-group">
+                  <label class="form-label" for="consultGoal">Fitness Goal *</label>
+                  <select id="consultGoal" class="form-control" required>
+                    <option value="Build Muscle">Build Muscle</option>
+                    <option value="Lose Fat">Lose Fat</option>
+                    <option value="Get Stronger">Get Stronger</option>
+                    <option value="Improve Conditioning">Improve Conditioning</option>
+                    <option value="Improve Mobility">Improve Mobility</option>
+                    <option value="Build Consistency">Build Consistency</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="consultExperience">Experience Level *</label>
+                  <select id="consultExperience" class="form-control" required>
+                    <option value="Beginner">Beginner</option>
+                    <option value="Intermediate" selected>Intermediate</option>
+                    <option value="Advanced">Advanced</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="consultType">Preferred Training Type *</label>
+                  <select id="consultType" class="form-control" required>
+                    <option value="In-Person">1-on-1 In-Person</option>
+                    <option value="Online">Online Coaching</option>
+                    <option value="Hybrid">12-Week Transformation (Hybrid)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label class="form-label" for="consultDate">Preferred Date *</label>
+                  <input type="date" id="consultDate" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="consultTime">Preferred Time *</label>
+                  <select id="consultTime" class="form-control" required>
+                    <option value="Morning (6:00 AM – 10:00 AM)">Morning (6:00 AM – 10:00 AM)</option>
+                    <option value="Midday (11:00 AM – 2:00 PM)">Midday (11:00 AM – 2:00 PM)</option>
+                    <option value="Afternoon (3:00 PM – 5:00 PM)">Afternoon (3:00 PM – 5:00 PM)</option>
+                    <option value="Evening (5:30 PM – 8:00 PM)">Evening (5:30 PM – 8:00 PM)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="consultNotes">Message</label>
+                <textarea id="consultNotes" class="form-control" rows="2" placeholder="Briefly share your current routine, injuries, or target timeline..."></textarea>
+              </div>
+
+              <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; margin-top:1.25rem;">
+                <button type="submit" class="btn btn-red" id="consultSubmitBtn">
+                  BOOK FREE CONSULTATION
+                </button>
+                <button type="button" class="btn btn-outline btn-sm" onclick="bookingWizard.open()">
+                  OPEN LIVE SLOT CALENDAR
+                </button>
+              </div>
+            </form>
+
+            <!-- Confirmation State -->
+            <div id="consultationSuccessBox" style="display:none; text-align:center; padding:1.5rem 1rem;">
+              <div style="width:52px; height:52px; border-radius:50%; background:var(--red-primary); color:#FFFFFF; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem auto; font-size:1.4rem; font-weight:800;">✓</div>
+              <div style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--red-primary); border:1px solid rgba(255,0,0,0.4); padding:0.25rem 0.65rem; border-radius:4px; margin-bottom:0.75rem;">DEMO MODE • REQUEST SIMULATED IN BROWSER</div>
+              <h3 style="font-size:1.85rem; margin-bottom:0.4rem;">CONSULTATION CONFIRMED</h3>
+              <p style="max-width:440px; margin:0 auto 1.25rem auto;">
+                Your consultation request has been logged. Coach Alex will confirm your session shortly.
+              </p>
+              <div id="consultationSummaryDetails" style="background:var(--bg-charcoal); border:1px solid var(--border-card); border-left:3px solid var(--red-primary); border-radius:var(--radius-sm); padding:1rem; max-width:420px; margin:0 auto 1.25rem auto; text-align:left; font-size:0.85rem;"></div>
+              <button class="btn btn-outline btn-sm" onclick="app.resetConsultationForm()">BOOK ANOTHER SESSION</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. CONCISE CONTACT INFORMATION SECTION -->
+      <section id="contact" class="section-alt">
+        <div class="container">
+          <div class="contact-strip-card">
+            <div>
+              <span class="eyebrow">DIRECT ACCESS</span>
+              <h2 class="section-title" style="margin-bottom:0.25rem;">GET IN TOUCH</h2>
+              <p>Ready to train? Reach out directly or lock in your consultation slot.</p>
+            </div>
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+              <button class="btn btn-red" onclick="app.navigateTo('consultation')">BOOK A FREE CONSULTATION</button>
+              <button class="btn btn-outline" onclick="bookingWizard.open()">OPEN BOOKING CALENDAR</button>
+            </div>
+          </div>
+
+          <div class="contact-items-row">
+            <div class="contact-info-box">
+              <div class="form-label" style="color:var(--red-primary);">EMAIL</div>
+              <div style="font-weight:700; font-size:0.88rem;" id="contactEmailText">coach@fitforge.training</div>
+            </div>
+            <div class="contact-info-box">
+              <div class="form-label" style="color:var(--red-primary);">PHONE</div>
+              <div style="font-weight:700; font-size:0.88rem;" id="contactPhoneText">+1 (415) 890-4321</div>
+            </div>
+            <div class="contact-info-box">
+              <div class="form-label" style="color:var(--red-primary);">LOCATION</div>
+              <div style="font-weight:700; font-size:0.88rem;" id="contactLocationText">San Francisco, CA</div>
+            </div>
+            <div class="contact-info-box">
+              <div class="form-label" style="color:var(--red-primary);">TRAINING HOURS</div>
+              <div style="font-weight:700; font-size:0.84rem;" id="contactHoursText">Mon–Sat • 6AM–8PM</div>
+            </div>
+            <div class="contact-info-box">
+              <div class="form-label" style="color:var(--red-primary);">INSTAGRAM</div>
+              <div style="font-weight:700; font-size:0.88rem;" id="contactInstagramText">@fitforge.coaching</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- =====================================================================
+       CLIENT PORTAL VIEW
+       ===================================================================== -->
+  <div id="clientPortalView" class="app-view-panel" style="padding-top:6.5rem; padding-bottom:4.5rem; min-height:85vh;">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:1.25rem; margin-bottom:2rem;">
+        <div>
+          <span class="eyebrow">ATHLETE PORTAL</span>
+          <h1 class="section-title" style="margin-bottom:0.25rem;">WELCOME BACK, <span id="portalUserName" class="text-red">ATHLETE</span></h1>
+          <p>Your scheduled sessions, active training block, and weekly targets.</p>
+        </div>
+        <div style="display:flex; gap:0.65rem; flex-wrap:wrap;">
+          <button class="btn btn-red btn-sm" onclick="bookingWizard.open()">+ SCHEDULE SESSION</button>
+          <button class="btn btn-outline btn-sm" id="portalSignInBtn" onclick="authManager.openModal('login')">SIGN IN</button>
+          <button class="btn btn-outline btn-sm" onclick="app.switchView('home')">← BACK TO WEBSITE</button>
+        </div>
+      </div>
+
+      <div class="dashboard-metrics-grid">
+        <div class="metric-card">
+          <div class="form-label" style="color:var(--red-primary);">ACTIVE PROGRAM</div>
+          <div class="metric-val" style="font-size:1.35rem;">PERSONAL TRAINING</div>
+          <p style="font-size:0.8rem; margin-top:0.25rem;">3 Sessions / Week</p>
+        </div>
+        <div class="metric-card">
+          <div class="form-label" style="color:var(--red-primary);">SESSIONS COMPLETED</div>
+          <div class="metric-val">18</div>
+          <p style="font-size:0.8rem; margin-top:0.25rem;">96% Consistency</p>
+        </div>
+        <div class="metric-card">
+          <div class="form-label" style="color:var(--red-primary);">CURRENT STREAK</div>
+          <div class="metric-val text-red">6 WEEKS</div>
+          <p style="font-size:0.8rem; margin-top:0.25rem;">All Check-ins Logged</p>
+        </div>
+        <div class="metric-card">
+          <div class="form-label" style="color:var(--red-primary);">DAILY TARGET</div>
+          <div class="metric-val">175g PRO</div>
+          <p style="font-size:0.8rem; margin-top:0.25rem;">2,350 kcal / day</p>
+        </div>
+      </div>
+
+      <div class="glass-card" style="padding:1.75rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1.25rem;">
+          <h3 style="font-size:1.35rem;">SCHEDULED SESSIONS</h3>
+          <button class="btn btn-outline btn-sm" onclick="bookingWizard.open()">BOOK NEW SLOT</button>
+        </div>
+        <div id="portalBookingsContainer" style="display:flex; flex-direction:column; gap:0.75rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       COACH ADMIN VIEW
+       ===================================================================== -->
+  <div id="adminView" class="app-view-panel" style="padding-top:6.5rem; padding-bottom:4.5rem; min-height:85vh;">
+    <div class="container">
+      <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:2rem;">
+        <div>
+          <span class="eyebrow">COACH ROSTER</span>
+          <h1 class="section-title" style="margin-bottom:0.25rem;">TRAINER COMMAND CENTER</h1>
+        </div>
+        <div style="display:flex; gap:0.65rem;">
+          <button class="btn btn-outline btn-sm" onclick="app.switchView('home')">← BACK TO WEBSITE</button>
+        </div>
+      </div>
+
+      <div class="glass-card" style="padding:1.75rem; overflow-x:auto;">
+        <h3 style="font-size:1.35rem; margin-bottom:1rem;">CLIENT SESSIONS &amp; CONSULTATIONS</h3>
+        <div id="adminBookingsList" style="display:flex; flex-direction:column; gap:0.75rem;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MINIMAL FOOTER
+       ===================================================================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-minimal-row">
+        <div>
+          <div class="nav-logo-main">FIT<span>FORGE</span></div>
+          <div class="nav-logo-sub">Personal Training &amp; Coaching</div>
+        </div>
+
+        <ul class="footer-quick-links">
+          <li><a onclick="app.navigateTo('programs')">Programs</a></li>
+          <li><a onclick="app.navigateTo('training')">Training</a></li>
+          <li><a onclick="app.navigateTo('results')">Results</a></li>
+          <li><a onclick="app.navigateTo('contact')">Contact</a></li>
+        </ul>
+
+        <div style="display:flex; gap:0.75rem; align-items:center;">
+          <a href="#contact" onclick="app.navigateTo('contact')" class="glass-pill" aria-label="Instagram">IG • @fitforge.coaching</a>
+        </div>
+      </div>
+
+      <div style="padding-top:1.25rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; font-size:0.76rem; color:var(--text-muted);">
+        <div>&copy; 2026 FitForge Personal Training &amp; Coaching. All rights reserved.</div>
+        <div>Serious Personal Training. Serious Results.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       INTERACTIVE 6-STEP BOOKING CALENDAR WIZARD MODAL
+       ===================================================================== -->
+  <div class="modal-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingWizardTitle">
+    <div class="modal-window">
+      <button class="modal-close-btn" onclick="bookingWizard.close()" aria-label="Close Booking Wizard">✕</button>
+
+      <div style="margin-bottom:1.25rem;">
+        <span class="eyebrow" style="margin-bottom:0.2rem;">SESSION SCHEDULER</span>
+        <h2 id="bookingWizardTitle" style="font-size:1.75rem;">BOOK YOUR SESSION</h2>
+      </div>
+
+      <div class="step-indicator-bar" id="wizardStepDots">
+        <div class="step-dot active" data-step="1">1</div>
+        <div class="step-dot" data-step="2">2</div>
+        <div class="step-dot" data-step="3">3</div>
+        <div class="step-dot" data-step="4">4</div>
+        <div class="step-dot" data-step="5">5</div>
+        <div class="step-dot" data-step="6">✓</div>
+      </div>
+
+      <!-- Step 1: Select Program -->
+      <div id="wizardStep1" class="wizard-step-pane">
+        <h3 style="font-size:1.1rem; margin-bottom:0.85rem;">STEP 1: SELECT PROGRAM</h3>
+        <div id="wizardProgramList" style="display:flex; flex-direction:column; gap:0.65rem; margin-bottom:1.5rem;"></div>
+        <div style="display:flex; justify-content:flex-end;">
+          <button class="btn btn-red btn-sm" onclick="bookingWizard.nextStep(2)">CONTINUE →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Select Format -->
+      <div id="wizardStep2" class="wizard-step-pane" style="display:none;">
+        <h3 style="font-size:1.1rem; margin-bottom:0.85rem;">STEP 2: TRAINING FORMAT</h3>
+        <div id="wizardFormatList" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.75rem; margin-bottom:1.5rem;"></div>
+        <div style="display:flex; justify-content:space-between;">
+          <button class="btn btn-outline btn-sm" onclick="bookingWizard.prevStep(1)">← BACK</button>
+          <button class="btn btn-red btn-sm" onclick="bookingWizard.nextStep(3)">CONTINUE →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Select Date -->
+      <div id="wizardStep3" class="wizard-step-pane" style="display:none;">
+        <h3 style="font-size:1.1rem; margin-bottom:0.85rem;">STEP 3: PREFERRED DATE</h3>
+        <div class="form-group">
+          <label class="form-label" for="bookingDateInput">Select Date</label>
+          <input type="date" id="bookingDateInput" class="form-control" onchange="bookingWizard.onDateSelected(this.value)">
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:1.5rem;">
+          <button class="btn btn-outline btn-sm" onclick="bookingWizard.prevStep(2)">← BACK</button>
+          <button class="btn btn-red btn-sm" onclick="bookingWizard.nextStep(4)">VIEW TIME SLOTS →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Select Time Slot -->
+      <div id="wizardStep4" class="wizard-step-pane" style="display:none;">
+        <h3 style="font-size:1.1rem; margin-bottom:0.35rem;">STEP 4: SELECT TIME SLOT</h3>
+        <p style="font-size:0.82rem; margin-bottom:0.65rem;" id="slotDateSubtitle"></p>
+        <div style="display:flex; gap:1rem; font-size:0.72rem; color:var(--text-secondary); margin-bottom:0.5rem;">
+          <span><strong style="color:#FFFFFF;">■</strong> Available</span>
+          <span><strong style="color:var(--red-primary);">■</strong> Selected</span>
+          <span><strong style="color:#555555;">■</strong> Unavailable</span>
+        </div>
+        <div class="slot-grid" id="wizardTimeSlotsGrid"></div>
+        <div style="display:flex; justify-content:space-between; margin-top:1.5rem;">
+          <button class="btn btn-outline btn-sm" onclick="bookingWizard.prevStep(3)">← BACK</button>
+          <button class="btn btn-red btn-sm" id="step4ContinueBtn" disabled onclick="bookingWizard.nextStep(5)">CONTINUE →</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Client Details -->
+      <div id="wizardStep5" class="wizard-step-pane" style="display:none;">
+        <h3 style="font-size:1.1rem; margin-bottom:0.85rem;">STEP 5: ATHLETE DETAILS</h3>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" id="wizClientName" class="form-control" placeholder="Alex Rivera" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email *</label>
+            <input type="email" id="wizClientEmail" class="form-control" placeholder="alex@example.com" required>
+          </div>
+        </div>
+        <div class="form-grid-2">
+          <div class="form-group">
+            <label class="form-label">Phone *</label>
+            <input type="tel" id="wizClientPhone" class="form-control" placeholder="+1 (415) 555-0192" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Primary Fitness Goal</label>
+            <select id="wizFitnessGoal" class="form-control">
+              <option value="Build Muscle">Build Muscle</option>
+              <option value="Lose Fat">Lose Fat</option>
+              <option value="Get Stronger">Get Stronger</option>
+              <option value="Improve Conditioning">Improve Conditioning</option>
+              <option value="Improve Mobility">Improve Mobility</option>
+              <option value="Build Consistency">Build Consistency</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:1.25rem;">
+          <button class="btn btn-outline btn-sm" onclick="bookingWizard.prevStep(4)">← BACK</button>
+          <button class="btn btn-red" id="confirmBookingBtn" onclick="bookingWizard.submitBooking()">CONFIRM SESSION</button>
+        </div>
+      </div>
+
+      <!-- Step 6: Confirmation -->
+      <div id="wizardStep6" class="wizard-step-pane" style="display:none; text-align:center; padding:1rem 0;">
+        <div style="width:52px; height:52px; border-radius:50%; background:var(--red-primary); color:#FFFFFF; display:flex; align-items:center; justify-content:center; margin:0 auto 1rem auto; font-size:1.4rem; font-weight:800;">✓</div>
+        <div style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--red-primary); border:1px solid rgba(255,0,0,0.4); padding:0.25rem 0.65rem; border-radius:4px; margin-bottom:0.75rem;">DEMO MODE • SESSION RECORDED LOCALLY</div>
+        <h3 style="font-size:1.75rem; margin-bottom:0.35rem;">SESSION CONFIRMED</h3>
+        <p style="font-size:0.9rem; max-width:420px; margin:0 auto 1.25rem auto;">
+          Your training session is locked in. View details below or in your Client Portal.
+        </p>
+        <div id="wizardConfirmationDetails" style="background:var(--bg-charcoal); border:1px solid var(--border-card); border-left:3px solid var(--red-primary); border-radius:var(--radius-sm); padding:1.15rem; text-align:left; max-width:420px; margin:0 auto 1.5rem auto; font-size:0.86rem;"></div>
+        <div style="display:flex; justify-content:center; gap:0.75rem;">
+          <button class="btn btn-red btn-sm" onclick="bookingWizard.close(); app.openClientPortal();">OPEN CLIENT PORTAL</button>
+          <button class="btn btn-outline btn-sm" onclick="bookingWizard.close()">DONE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       AUTH MODAL (Sign In / Create Account)
+       ===================================================================== -->
+  <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+    <div class="modal-window" style="max-width:440px;">
+      <button class="modal-close-btn" onclick="authManager.closeModal()" aria-label="Close Auth Modal">✕</button>
+      <div style="text-align:center; margin-bottom:1.5rem;">
+        <span class="eyebrow">CLIENT PORTAL</span>
+        <h2 id="authModalTitle" style="font-size:1.75rem;">ATHLETE SIGN IN</h2>
+      </div>
+
+      <form id="authForm" onsubmit="authManager.handleSubmit(event)">
+        <div class="form-group" id="nameFieldGroup" style="display:none;">
+          <label class="form-label">Full Name</label>
+          <input type="text" id="authName" class="form-control" placeholder="Alex Rivera">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="authEmail" class="form-control" placeholder="alex@example.com" required>
+        </div>
+        <div class="form-group" id="phoneFieldGroup" style="display:none;">
+          <label class="form-label">Phone Number</label>
+          <input type="tel" id="authPhone" class="form-control" placeholder="+1 (555) 019-2834">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="authPassword" class="form-control" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn btn-red" style="width:100%; margin-top:0.5rem;" id="authSubmitBtn">SIGN IN</button>
+      </form>
+
+      <div style="text-align:center; margin-top:1.25rem; font-size:0.84rem;">
+        <span id="authSwitchPrompt">New client?</span>
+        <a style="color:var(--red-primary); font-weight:700; cursor:pointer; margin-left:0.35rem;" id="authSwitchLink" onclick="authManager.toggleMode()">Create Account</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MOBILE NAVIGATION DRAWER
+       ===================================================================== -->
+  <div class="modal-overlay" id="mobileNavDrawer">
+    <div class="modal-window" style="max-width:380px; text-align:center;">
+      <button class="modal-close-btn" onclick="app.toggleMobileDrawer()" aria-label="Close Menu">✕</button>
+      <div style="margin-bottom:1.5rem;">
+        <div class="nav-logo-main">FIT<span>FORGE</span></div>
+        <div class="nav-logo-sub">Personal Training &amp; Coaching</div>
+      </div>
+      <ul style="list-style:none; display:flex; flex-direction:column; gap:0.95rem; font-size:1.05rem; font-weight:700; text-transform:uppercase; margin-bottom:1.75rem;">
+        <li><a onclick="app.toggleMobileDrawer(); app.navigateTo('home')">Home</a></li>
+        <li><a onclick="app.toggleMobileDrawer(); app.navigateTo('about')">About</a></li>
+        <li><a onclick="app.toggleMobileDrawer(); app.navigateTo('programs')">Programs</a></li>
+        <li><a onclick="app.toggleMobileDrawer(); app.navigateTo('results')">Results</a></li>
+        <li><a onclick="app.toggleMobileDrawer(); app.navigateTo('training')">Training</a></li>
+        <li><a onclick="app.toggleMobileDrawer(); app.navigateTo('testimonials')">Testimonials</a></li>
+        <li><a onclick="app.toggleMobileDrawer(); app.navigateTo('faq')">FAQ</a></li>
+        <li><a onclick="app.toggleMobileDrawer(); app.navigateTo('contact')">Contact</a></li>
+      </ul>
+      <div style="display:flex; flex-direction:column; gap:0.65rem;">
+        <button class="btn btn-red" onclick="app.toggleMobileDrawer(); app.navigateTo('consultation')">BOOK A FREE CONSULTATION</button>
+        <button class="btn btn-outline" onclick="app.toggleMobileDrawer(); app.openClientPortal()">CLIENT PORTAL</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- =====================================================================
+       SCRIPTS & APPLICATION CONTROLLERS
+       ===================================================================== -->
+  <script src="js/icons.js"></script>
+  <script src="js/siteContent.js"></script>
+  <script src="js/bookingService.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      const icon = type === 'error' ? '!' : '✓';
+      toast.innerHTML = `<span style="color:var(--red-primary); font-weight:800;">${icon}</span><span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+        toast.style.transition = 'all 0.2s ease';
+        setTimeout(() => toast.remove(), 220);
+      }, 3600);
+    }
+
+    const app = {
+      selectedGoalId: 'build-muscle',
+      selectedProgramId: 'personal-training',
+      selectedTrainingCatId: 'strength',
+
+      init() {
+        if (!window.SiteContent) return;
+        const dateInput = document.getElementById('consultDate');
+        if (dateInput) {
+          const tomorrow = new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0];
+          dateInput.min = new Date().toISOString().split('T')[0];
+          dateInput.value = tomorrow;
+        }
+        this.renderCoachAbout();
+        this.renderGoals();
+        this.renderPrograms();
+        this.renderTrainingExperience();
+        this.renderResults();
+        this.renderNutrition();
+        this.renderTestimonials();
+        this.renderFaqs();
+        this.renderContact();
+      },
+
+      renderCoachAbout() {
+        const profile = window.SiteContent.trainerProfile;
+        if (!profile) return;
+
+        const bioEl = document.getElementById('coachBioContainer');
+        if (bioEl) {
+          bioEl.innerHTML = profile.bioParagraphs.map(p => `<p>${p}</p>`).join('');
+        }
+
+        const proofEl = document.getElementById('coachProofRow');
+        if (proofEl) {
+          proofEl.innerHTML = profile.credibilityItems.map(item => `
+            <div class="proof-badge"><span>■</span> ${item}</div>
+          `).join('');
+        }
+      },
+
+      renderGoals() {
+        const grid = document.getElementById('goalsGrid');
+        const banner = document.getElementById('goalRecommendationBanner');
+        if (!grid || !banner) return;
+
+        const goals = window.SiteContent.goals;
+        grid.innerHTML = goals.map(g => {
+          const isSelected = g.id === this.selectedGoalId;
+          const svg = window.FitIcons ? window.FitIcons.get(g.icon) : '■';
+          return `
+            <div class="goal-card ${isSelected ? 'selected' : ''}" onclick="app.selectGoal('${g.id}')" tabindex="0" role="button" aria-pressed="${isSelected}">
+              <div class="goal-card-left">
+                <div class="goal-icon-box">${svg}</div>
+                <div>
+                  <h3 style="font-size:1.05rem; letter-spacing:0.04em;">${g.title}</h3>
+                  <div style="font-size:0.75rem; color:var(--text-muted);">${g.training}</div>
+                </div>
+              </div>
+              <div class="goal-check-indicator" aria-hidden="true">✓</div>
+            </div>
+          `;
+        }).join('');
+
+        const activeGoal = goals.find(g => g.id === this.selectedGoalId) || goals[0];
+        banner.innerHTML = `
+          <div>
+            <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.16em; text-transform:uppercase; color:var(--red-primary); margin-bottom:0.5rem;">
+              YOUR RECOMMENDED PATH
+            </div>
+            <div class="goal-rec-metrics">
+              <div>
+                <div class="goal-rec-item-label">Goal</div>
+                <div class="goal-rec-item-val">${activeGoal.title}</div>
+              </div>
+              <div>
+                <div class="goal-rec-item-label">Training</div>
+                <div class="goal-rec-item-val">${activeGoal.training}</div>
+              </div>
+              <div>
+                <div class="goal-rec-item-label">Focus</div>
+                <div class="goal-rec-item-val">${activeGoal.focus}</div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-red btn-sm" onclick="app.selectProgram('${activeGoal.recommendedProgramId}'); app.navigateTo('programs')">
+            START YOUR PLAN
+          </button>
+        `;
+      },
+
+      selectGoal(goalId) {
+        this.selectedGoalId = goalId;
+        const goal = window.SiteContent.goals.find(g => g.id === goalId);
+        if (goal) {
+          this.selectedProgramId = goal.recommendedProgramId;
+        }
+        this.renderGoals();
+        this.renderPrograms();
+      },
+
+      renderPrograms() {
+        const grid = document.getElementById('programsGrid');
+        const drawer = document.getElementById('programDetailDrawer');
+        if (!grid || !drawer) return;
+
+        const programs = window.SiteContent.programs;
+        grid.innerHTML = programs.map(prog => {
+          const isSelected = prog.id === this.selectedProgramId;
+          return `
+            <div class="program-card ${isSelected ? 'selected' : ''}" onclick="app.selectProgram('${prog.id}')">
+              <div class="program-img-frame">
+                <img src="${prog.image}" alt="${prog.name}" loading="lazy">
+                <span class="program-num-badge">${prog.number}</span>
+                ${isSelected ? `<span class="program-status-tag">SELECTED</span>` : ''}
+              </div>
+              <div class="program-body">
+                <h3 style="font-size:1.4rem; margin-bottom:0.25rem;">${prog.name}</h3>
+                <p style="font-size:0.86rem; min-height:2.5em;">${prog.tagline}</p>
+
+                <div class="program-price-row">
+                  <span class="program-price-val">${prog.price}</span>
+                  <span class="program-price-period">${prog.billingPeriod}</span>
+                </div>
+
+                <ul class="program-features-list">
+                  ${prog.features.map(f => `
+                    <li><span class="check-dot">■</span> <span>${f}</span></li>
+                  `).join('')}
+                </ul>
+
+                <button type="button" class="btn ${isSelected ? 'btn-red' : 'btn-outline'}" style="width:100%;" onclick="event.stopPropagation(); bookingWizard.openWithProgram('${prog.id}')">
+                  ${isSelected ? prog.detailCta : prog.cta}
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        const activeProg = programs.find(p => p.id === this.selectedProgramId) || programs[0];
+        const d = activeProg.details;
+        drawer.innerHTML = `
+          <div>
+            <div style="font-size:0.7rem; font-weight:800; letter-spacing:0.15em; text-transform:uppercase; color:var(--red-primary); margin-bottom:0.25rem;">
+              SELECTED PROGRAM DETAILS • ${d.duration.toUpperCase()} • ${d.format.toUpperCase()}
+            </div>
+            <h3 style="font-size:1.55rem; margin-bottom:0.65rem;">${d.title}</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:1rem;">
+              ${d.benefits.map(b => `
+                <span style="font-size:0.84rem; color:#FFFFFF; display:inline-flex; align-items:center; gap:0.4rem;">
+                  <strong style="color:var(--red-primary);">✓</strong> ${b}
+                </span>
+              `).join('')}
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:1.25rem; flex-wrap:wrap;">
+            <div>
+              <div style="font-size:0.68rem; text-transform:uppercase; color:var(--text-muted); font-weight:700;">INVESTMENT</div>
+              <div style="font-family:var(--font-display); font-size:2rem; font-weight:700; color:#FFFFFF; line-height:1;">
+                ${activeProg.price}<span style="font-size:0.85rem; color:var(--text-secondary); font-family:var(--font-sans);">${activeProg.billingPeriod}</span>
+              </div>
+            </div>
+            <button class="btn btn-red" onclick="bookingWizard.openWithProgram('${activeProg.id}')">
+              ${activeProg.detailCta}
+            </button>
+          </div>
+        `;
+      },
+
+      selectProgram(programId) {
+        this.selectedProgramId = programId;
+        this.renderPrograms();
+      },
+
+      renderTrainingExperience() {
+        const tabsRow = document.getElementById('trainingTabsRow');
+        const panel = document.getElementById('trainingContentPanel');
+        if (!tabsRow || !panel || !window.SiteContent.workoutExperience) return;
+
+        const cats = window.SiteContent.workoutExperience.categories;
+        tabsRow.innerHTML = cats.map(c => {
+          const active = c.id === this.selectedTrainingCatId;
+          return `
+            <button type="button" role="tab" aria-selected="${active}"
+                    class="training-tab-btn ${active ? 'active' : ''}"
+                    onclick="app.selectTrainingCategory('${c.id}')">
+              ${c.name}
+            </button>
+          `;
+        }).join('');
+
+        const activeCat = cats.find(c => c.id === this.selectedTrainingCatId) || cats[0];
+        panel.innerHTML = `
+          <div>
+            <span class="eyebrow">TRAINING BLOCK • ${activeCat.name}</span>
+            <h3 style="font-size:1.75rem; margin-bottom:0.5rem;">${activeCat.name} FOCUS</h3>
+            <p style="font-size:0.92rem;">${activeCat.summary}</p>
+
+            <div class="training-chips-row">
+              <div class="info-chip">
+                <div class="info-chip-label">DIFFICULTY</div>
+                <div class="info-chip-val">${activeCat.difficulty}</div>
+              </div>
+              <div class="info-chip">
+                <div class="info-chip-label">SESSION</div>
+                <div class="info-chip-val">${activeCat.duration}</div>
+              </div>
+              <div class="info-chip">
+                <div class="info-chip-label">FOCUS</div>
+                <div class="info-chip-val">${activeCat.focus}</div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="form-label" style="color:var(--red-primary); margin-bottom:0.65rem;">EXAMPLE MOVEMENTS</div>
+            <div class="movements-grid">
+              ${activeCat.movements.map(m => `
+                <div class="movement-pill"><span>■</span> ${m}</div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      },
+
+      selectTrainingCategory(catId) {
+        this.selectedTrainingCatId = catId;
+        this.renderTrainingExperience();
+      },
+
+      renderResults() {
+        const grid = document.getElementById('resultsGrid');
+        if (!grid || !window.SiteContent.transformations) return;
+
+        grid.innerHTML = window.SiteContent.transformations.items.map(item => `
+          <div class="result-card">
+            <div class="result-visual">
+              <img src="${item.image}" alt="${item.clientName} — ${item.goal}" loading="lazy">
+            </div>
+            <div class="result-body">
+              <div>
+                <div style="font-size:0.72rem; font-weight:800; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-secondary);">
+                  ${item.duration} • ${item.goal}
+                </div>
+                <h3 style="font-size:1.25rem; margin-top:0.2rem;">${item.clientName}</h3>
+              </div>
+              <div class="result-metric-red">${item.result}</div>
+            </div>
+          </div>
+        `).join('');
+      },
+
+      renderNutrition() {
+        const grid = document.getElementById('nutritionGrid');
+        if (!grid || !window.SiteContent.nutrition) return;
+
+        grid.innerHTML = window.SiteContent.nutrition.pillars.map(pillar => {
+          const svg = window.FitIcons ? window.FitIcons.get(pillar.icon) : '■';
+          return `
+            <div class="nutrition-card">
+              <div class="nutrition-icon">${svg}</div>
+              <h3 style="font-size:1.1rem; margin-bottom:0.35rem;">${pillar.title}</h3>
+              <p style="font-size:0.85rem;">${pillar.description}</p>
+            </div>
+          `;
+        }).join('');
+      },
+
+      renderTestimonials() {
+        const grid = document.getElementById('testimonialsGrid');
+        if (!grid || !window.SiteContent.testimonials) return;
+
+        grid.innerHTML = window.SiteContent.testimonials.map(t => `
+          <div class="testimonial-card">
+            <p style="font-size:0.9rem; color:#FFFFFF; line-height:1.55;">"${t.quote}"</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; padding-top:0.85rem; border-top:1px solid var(--border-card);">
+              <div>
+                <div style="font-weight:700; font-size:0.9rem; color:#FFFFFF;">${t.clientName}</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">${t.goal}</div>
+              </div>
+              <span class="glass-pill" style="border-color:rgba(255,0,0,0.4); color:var(--red-primary);">${t.result}</span>
+            </div>
+          </div>
+        `).join('');
+      },
+
+      renderFaqs() {
+        const container = document.getElementById('faqContainer');
+        if (!container || !window.SiteContent.faqs) return;
+
+        container.innerHTML = window.SiteContent.faqs.map((faq, idx) => `
+          <div class="faq-item ${idx === 0 ? 'open' : ''}" onclick="this.classList.toggle('open')">
+            <div class="faq-header">
+              <span>${faq.question}</span>
+              <span class="faq-toggle-icon">⌄</span>
+            </div>
+            <div class="faq-content">${faq.answer}</div>
+          </div>
+        `).join('');
+      },
+
+      renderContact() {
+        const info = window.SiteContent.contactInfo;
+        if (!info) return;
+        const setEl = (id, val) => {
+          const el = document.getElementById(id);
+          if (el && val) el.textContent = val;
+        };
+        setEl('contactEmailText', info.email);
+        setEl('contactPhoneText', info.phone);
+        setEl('contactLocationText', info.location);
+        setEl('contactHoursText', info.hours);
+        setEl('contactInstagramText', info.instagram);
+      },
+
+      async submitConsultationForm(e) {
+        e.preventDefault();
+        const btn = document.getElementById('consultSubmitBtn');
+        const payload = {
+          name: document.getElementById('consultName').value.trim(),
+          email: document.getElementById('consultEmail').value.trim(),
+          phone: document.getElementById('consultPhone').value.trim(),
+          fitnessGoal: document.getElementById('consultGoal').value,
+          experience: document.getElementById('consultExperience').value,
+          trainingType: document.getElementById('consultType').value,
+          preferredDate: document.getElementById('consultDate').value,
+          preferredTime: document.getElementById('consultTime').value,
+          message: document.getElementById('consultNotes').value.trim(),
+          programId: this.selectedProgramId
+        };
+
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = 'BOOKING...';
+        }
+
+        try {
+          const res = await window.BookingService.submitConsultation(payload);
+          document.getElementById('consultationForm').style.display = 'none';
+          const box = document.getElementById('consultationSuccessBox');
+          const summary = document.getElementById('consultationSummaryDetails');
+          if (summary) {
+            summary.innerHTML = `
+              <div><strong>Reference:</strong> <span class="text-red">${res.referenceCode || 'CONS-CONFIRMED'}</span></div>
+              <div><strong>Athlete:</strong> ${payload.name}</div>
+              <div><strong>Goal &amp; Level:</strong> ${payload.fitnessGoal} (${payload.experience})</div>
+              <div><strong>Format:</strong> ${payload.trainingType}</div>
+              <div><strong>Requested Slot:</strong> ${payload.preferredDate} • ${payload.preferredTime}</div>
+            `;
+          }
+          if (box) box.style.display = 'block';
+          showToast('Consultation request confirmed!');
+        } catch (err) {
+          showToast(err.message || 'Could not submit consultation request', 'error');
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = 'BOOK FREE CONSULTATION';
+          }
+        }
+      },
+
+      resetConsultationForm() {
+        const form = document.getElementById('consultationForm');
+        const box = document.getElementById('consultationSuccessBox');
+        if (form) {
+          form.reset();
+          form.style.display = 'block';
+        }
+        if (box) box.style.display = 'none';
+      },
+
+      navigateTo(sectionId) {
+        this.switchView('home');
+        setTimeout(() => {
+          const target = document.getElementById(sectionId);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.toggle('active', link.getAttribute('data-nav') === sectionId);
+          });
+        }, 30);
+      },
+
+      switchView(viewName) {
+        document.getElementById('homeView').classList.toggle('active', viewName === 'home');
+        document.getElementById('clientPortalView').classList.toggle('active', viewName === 'portal');
+        document.getElementById('adminView').classList.toggle('active', viewName === 'admin');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (viewName === 'portal') this.renderPortalBookings();
+        if (viewName === 'admin') this.renderAdminBookings();
+      },
+
+      openClientPortal() {
+        this.switchView('portal');
+      },
+
+      renderPortalBookings() {
+        const container = document.getElementById('portalBookingsContainer');
+        if (!container) return;
+
+        const user = window.authManager && window.authManager.currentUser;
+        const nameEl = document.getElementById('portalUserName');
+        const signInBtn = document.getElementById('portalSignInBtn');
+        if (user) {
+          if (nameEl) nameEl.textContent = user.name.split(' ')[0].toUpperCase();
+          if (signInBtn) signInBtn.style.display = 'none';
+        } else {
+          if (nameEl) nameEl.textContent = 'ATHLETE (DEMO)';
+          if (signInBtn) signInBtn.style.display = 'inline-flex';
+        }
+
+        const list = window.BookingService ? window.BookingService.getBookings() : [];
+        container.innerHTML = list.map(b => `
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; padding:1rem 1.25rem; background:var(--bg-charcoal); border:1px solid var(--border-card); border-left:3px solid var(--red-primary); border-radius:var(--radius-sm);">
+            <div>
+              <span style="font-size:0.72rem; font-weight:700; text-transform:uppercase; color:var(--red-primary);">${b.id || b.referenceCode} • ${b.trainingType || 'In-Person'}</span>
+              <h4 style="font-size:1.1rem; margin:0.15rem 0;">${b.programName}</h4>
+              <div style="font-size:0.84rem; color:var(--text-secondary);">${b.date} at ${b.time || b.timeSlot || '09:30 AM'} • Goal: ${b.goal || 'Strength'}</div>
+            </div>
+            <span class="glass-pill" style="border-color:var(--red-primary); color:#FFFFFF;">${b.status || 'Confirmed'}</span>
+          </div>
+        `).join('');
+      },
+
+      renderAdminBookings() {
+        const container = document.getElementById('adminBookingsList');
+        if (!container || !window.BookingService) return;
+        const list = window.BookingService.getBookings();
+        container.innerHTML = list.map(b => `
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; padding:1rem 1.25rem; background:var(--bg-charcoal); border:1px solid var(--border-card); border-radius:var(--radius-sm);">
+            <div>
+              <div style="font-size:0.74rem; color:var(--red-primary); font-weight:700;">[${b.id}] ${b.client || 'Athlete'} (${b.email || 'athlete@fitforge.training'})</div>
+              <div style="font-weight:700; font-size:1.05rem;">${b.programName} — ${b.trainingType}</div>
+              <div style="font-size:0.82rem; color:var(--text-secondary);">${b.date} at ${b.time} • Goal: ${b.goal || 'Strength'}</div>
+            </div>
+            <span class="glass-pill">${b.status}</span>
+          </div>
+        `).join('');
+      },
+
+      toggleMobileDrawer() {
+        const drawer = document.getElementById('mobileNavDrawer');
+        if (drawer) drawer.classList.toggle('active');
+      }
+    };
+
+    /* =====================================================================
+       6-STEP INTERACTIVE BOOKING CALENDAR WIZARD
+       ===================================================================== */
+    const bookingWizard = {
+      step: 1,
+      selectedProgramId: 'personal-training',
+      selectedFormat: 'In-Person',
+      selectedDate: new Date(Date.now() + 86400000).toISOString().split('T')[0],
+      selectedSlot: null,
+
+      open() {
+        this.step = 1;
+        this.renderStep1();
+        this.renderStep2();
+        const dateInput = document.getElementById('bookingDateInput');
+        if (dateInput) {
+          dateInput.min = new Date().toISOString().split('T')[0];
+          dateInput.value = this.selectedDate;
+        }
+        this.showStep(1);
+        document.getElementById('bookingModal').classList.add('active');
+      },
+
+      openWithProgram(programId) {
+        this.selectedProgramId = programId;
+        const prog = window.SiteContent.programs.find(p => p.id === programId);
+        if (prog && prog.trainingTypeDefault) {
+          this.selectedFormat = prog.trainingTypeDefault;
+        }
+        this.open();
+      },
+
+      close() {
+        document.getElementById('bookingModal').classList.remove('active');
+      },
+
+      showStep(s) {
+        this.step = s;
+        for (let i = 1; i <= 6; i++) {
+          const pane = document.getElementById('wizardStep' + i);
+          if (pane) pane.style.display = i === s ? 'block' : 'none';
+        }
+        document.querySelectorAll('#wizardStepDots .step-dot').forEach(dot => {
+          const ds = parseInt(dot.getAttribute('data-step'), 10);
+          dot.classList.toggle('active', ds <= s);
+        });
+        if (s === 4) this.loadSlots();
+      },
+
+      nextStep(s) { this.showStep(s); },
+      prevStep(s) { this.showStep(s); },
+
+      renderStep1() {
+        const list = document.getElementById('wizardProgramList');
+        if (!list) return;
+        list.innerHTML = window.SiteContent.programs.map(p => {
+          const active = p.id === this.selectedProgramId;
+          return `
+            <div onclick="bookingWizard.selectProgram('${p.id}')" style="padding:1rem 1.25rem; border-radius:var(--radius-sm); border:1px solid ${active ? 'var(--red-primary)' : 'var(--border-card)'}; background:${active ? 'var(--red-subtle)' : 'var(--bg-charcoal)'}; cursor:pointer; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-weight:700; font-size:0.95rem;">${p.number} — ${p.name}</div>
+                <div style="font-size:0.8rem; color:var(--text-secondary);">${p.tagline}</div>
+              </div>
+              <div style="font-family:var(--font-display); font-size:1.35rem; font-weight:700; color:${active ? 'var(--red-primary)' : '#FFFFFF'};">${p.fullPriceDisplay}</div>
+            </div>
+          `;
+        }).join('');
+      },
+
+      selectProgram(id) {
+        this.selectedProgramId = id;
+        this.renderStep1();
+      },
+
+      renderStep2() {
+        const list = document.getElementById('wizardFormatList');
+        if (!list) return;
+        list.innerHTML = window.SiteContent.bookingConfig.trainingTypes.map(t => {
+          const active = t.id === this.selectedFormat;
+          return `
+            <div onclick="bookingWizard.selectFormat('${t.id}')" style="padding:1rem; border-radius:var(--radius-sm); border:1px solid ${active ? 'var(--red-primary)' : 'var(--border-card)'}; background:${active ? 'var(--red-subtle)' : 'var(--bg-charcoal)'}; cursor:pointer; text-align:center;">
+              <div style="font-weight:700; font-size:0.9rem; margin-bottom:0.25rem;">${t.name}</div>
+              <div style="font-size:0.75rem; color:var(--text-secondary);">${t.badge}</div>
+            </div>
+          `;
+        }).join('');
+      },
+
+      selectFormat(fmt) {
+        this.selectedFormat = fmt;
+        this.renderStep2();
+      },
+
+      onDateSelected(val) {
+        if (val) this.selectedDate = val;
+      },
+
+      async loadSlots() {
+        const grid = document.getElementById('wizardTimeSlotsGrid');
+        const sub = document.getElementById('slotDateSubtitle');
+        if (sub) sub.textContent = `Showing slots for ${this.selectedDate} (${this.selectedFormat})`;
+        if (!grid) return;
+
+        grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:1rem; color:var(--text-secondary);">Loading available slots...</div>`;
+
+        const slots = await window.BookingService.getAvailableSlots({
+          date: this.selectedDate,
+          programId: this.selectedProgramId,
+          trainingType: this.selectedFormat
+        });
+
+        grid.innerHTML = slots.map(slot => `
+          <div class="slot-pill ${slot.available ? '' : 'unavailable'} ${this.selectedSlot === slot.time ? 'selected' : ''}"
+               onclick="${slot.available ? `bookingWizard.pickSlot('${slot.time}')` : ''}">
+            ${slot.time}
+          </div>
+        `).join('');
+      },
+
+      pickSlot(time) {
+        this.selectedSlot = time;
+        const btn = document.getElementById('step4ContinueBtn');
+        if (btn) btn.disabled = false;
+        this.loadSlots();
+      },
+
+      async submitBooking() {
+        const name = document.getElementById('wizClientName').value.trim();
+        const email = document.getElementById('wizClientEmail').value.trim();
+        const phone = document.getElementById('wizClientPhone').value.trim();
+        const goal = document.getElementById('wizFitnessGoal').value;
+
+        if (!name || !email || !phone) {
+          showToast('Please enter your name, email, and phone number.', 'error');
+          return;
+        }
+
+        const prog = window.SiteContent.programs.find(p => p.id === this.selectedProgramId) || window.SiteContent.programs[0];
+        const btn = document.getElementById('confirmBookingBtn');
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = 'CONFIRMING...';
+        }
+
+        try {
+          const result = await window.BookingService.createBooking({
+            programId: prog.id,
+            programName: prog.name,
+            trainingType: this.selectedFormat,
+            date: this.selectedDate,
+            time: this.selectedSlot || '09:30 AM',
+            name,
+            email,
+            phone,
+            goal
+          });
+
+          const details = document.getElementById('wizardConfirmationDetails');
+          if (details) {
+            details.innerHTML = `
+              <div><strong>Booking Reference:</strong> <span class="text-red">${result.referenceCode}</span></div>
+              <div><strong>Program:</strong> ${prog.name} (${this.selectedFormat})</div>
+              <div><strong>Date &amp; Time:</strong> ${this.selectedDate} at ${this.selectedSlot || '09:30 AM'}</div>
+              <div><strong>Athlete:</strong> ${name} (${email})</div>
+            `;
+          }
+          this.showStep(6);
+          showToast('Session booked! Ref: ' + result.referenceCode);
+        } catch (err) {
+          showToast(err.message || 'Could not complete booking', 'error');
+        } finally {
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = 'CONFIRM SESSION';
+          }
+        }
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      app.init();
+    });
+  </script>
+</body>
+</html>

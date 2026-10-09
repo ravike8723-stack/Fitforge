@@ -1,0 +1,29 @@
+# Environment variables — NEVER commit these
+.env
+.env.*
+!.env.example
+
+# Node dependencies
+node_modules/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+logs/
+
+# Build and archive output
+dist/
+build/
+*.dump
+*.tar.gz
+*.zip
+
+# SSL and private keys
+*.pem
+*.key
+*.crt
+*.cert
