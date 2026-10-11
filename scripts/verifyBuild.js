@@ -29,7 +29,7 @@ function assert(cond, msg) {
 console.log("=== FitForge Frontend Build Verification ===");
 
 // 1. Verify Core HTML Pages
-const htmlPages = ["index.html", "booking.html", "dashboard.html", "admin.html"];
+const htmlPages = ["index.html", "booking.html", "admin.html"];
 for (const page of htmlPages) {
   const rootPath = path.join(ROOT, page);
   const pubPath = path.join(ROOT, "public", page);
@@ -70,7 +70,6 @@ const jsFiles = [
   "js/api.js",
   "js/auth.js",
   "js/booking.js",
-  "js/dashboard.js",
   "js/admin.js",
   "js/theme.js",
   "src/config/siteContent.js"

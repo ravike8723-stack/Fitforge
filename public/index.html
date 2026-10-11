@@ -38,16 +38,6 @@
       </ul>
 
       <div class="nav-actions">
-        <div id="guestActions" class="desktop-auth" style="display:flex; gap:0.5rem; align-items:center;">
-          <button class="btn btn-outline btn-sm" onclick="app.openClientPortal()">CLIENT PORTAL</button>
-        </div>
-
-        <div id="userActions" class="desktop-auth" style="display:none; gap:0.5rem; align-items:center;">
-          <button class="btn btn-outline btn-sm" id="portalBtn" onclick="app.switchView('portal')">CLIENT PORTAL</button>
-          <button class="btn btn-outline btn-sm" id="adminBtn" style="display:none; border-color:var(--red-primary); color:var(--red-primary);" onclick="app.switchView('admin')">COACH ADMIN</button>
-          <button class="btn btn-outline btn-sm" onclick="authManager.logout()">SIGN OUT</button>
-        </div>
-
         <button class="btn btn-red btn-sm" onclick="app.navigateTo('consultation')">BOOK A FREE CONSULTATION</button>
         <button class="mobile-menu-btn" onclick="app.toggleMobileDrawer()" aria-label="Open Navigation Menu">☰</button>
       </div>
@@ -377,56 +367,6 @@
     </main>
   </div>
 
-  <!-- =====================================================================
-       CLIENT PORTAL VIEW
-       ===================================================================== -->
-  <div id="clientPortalView" class="app-view-panel" style="padding-top:6.5rem; padding-bottom:4.5rem; min-height:85vh;">
-    <div class="container">
-      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:1.25rem; margin-bottom:2rem;">
-        <div>
-          <span class="eyebrow">ATHLETE PORTAL</span>
-          <h1 class="section-title" style="margin-bottom:0.25rem;">WELCOME BACK, <span id="portalUserName" class="text-red">ATHLETE</span></h1>
-          <p>Your scheduled sessions, active training block, and weekly targets.</p>
-        </div>
-        <div style="display:flex; gap:0.65rem; flex-wrap:wrap;">
-          <button class="btn btn-red btn-sm" onclick="bookingWizard.open()">+ SCHEDULE SESSION</button>
-          <button class="btn btn-outline btn-sm" id="portalSignInBtn" onclick="authManager.openModal('login')">SIGN IN</button>
-          <button class="btn btn-outline btn-sm" onclick="app.switchView('home')">← BACK TO WEBSITE</button>
-        </div>
-      </div>
-
-      <div class="dashboard-metrics-grid">
-        <div class="metric-card">
-          <div class="form-label" style="color:var(--red-primary);">ACTIVE PROGRAM</div>
-          <div class="metric-val" style="font-size:1.35rem;">PERSONAL TRAINING</div>
-          <p style="font-size:0.8rem; margin-top:0.25rem;">3 Sessions / Week</p>
-        </div>
-        <div class="metric-card">
-          <div class="form-label" style="color:var(--red-primary);">SESSIONS COMPLETED</div>
-          <div class="metric-val">18</div>
-          <p style="font-size:0.8rem; margin-top:0.25rem;">96% Consistency</p>
-        </div>
-        <div class="metric-card">
-          <div class="form-label" style="color:var(--red-primary);">CURRENT STREAK</div>
-          <div class="metric-val text-red">6 WEEKS</div>
-          <p style="font-size:0.8rem; margin-top:0.25rem;">All Check-ins Logged</p>
-        </div>
-        <div class="metric-card">
-          <div class="form-label" style="color:var(--red-primary);">DAILY TARGET</div>
-          <div class="metric-val">175g PRO</div>
-          <p style="font-size:0.8rem; margin-top:0.25rem;">2,350 kcal / day</p>
-        </div>
-      </div>
-
-      <div class="glass-card" style="padding:1.75rem;">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; margin-bottom:1.25rem;">
-          <h3 style="font-size:1.35rem;">SCHEDULED SESSIONS</h3>
-          <button class="btn btn-outline btn-sm" onclick="bookingWizard.open()">BOOK NEW SLOT</button>
-        </div>
-        <div id="portalBookingsContainer" style="display:flex; flex-direction:column; gap:0.75rem;"></div>
-      </div>
-    </div>
-  </div>
 
   <!-- =====================================================================
        COACH ADMIN VIEW
@@ -591,51 +531,12 @@
         <div style="display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--red-primary); border:1px solid rgba(255,0,0,0.4); padding:0.25rem 0.65rem; border-radius:4px; margin-bottom:0.75rem;">DEMO MODE • SESSION RECORDED LOCALLY</div>
         <h3 style="font-size:1.75rem; margin-bottom:0.35rem;">SESSION CONFIRMED</h3>
         <p style="font-size:0.9rem; max-width:420px; margin:0 auto 1.25rem auto;">
-          Your training session is locked in. View details below or in your Client Portal.
+          Your training session is locked in. View details below.
         </p>
         <div id="wizardConfirmationDetails" style="background:var(--bg-charcoal); border:1px solid var(--border-card); border-left:3px solid var(--red-primary); border-radius:var(--radius-sm); padding:1.15rem; text-align:left; max-width:420px; margin:0 auto 1.5rem auto; font-size:0.86rem;"></div>
         <div style="display:flex; justify-content:center; gap:0.75rem;">
-          <button class="btn btn-red btn-sm" onclick="bookingWizard.close(); app.openClientPortal();">OPEN CLIENT PORTAL</button>
-          <button class="btn btn-outline btn-sm" onclick="bookingWizard.close()">DONE</button>
+          <button class="btn btn-red btn-sm" onclick="bookingWizard.close()">DONE</button>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- =====================================================================
-       AUTH MODAL (Sign In / Create Account)
-       ===================================================================== -->
-  <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
-    <div class="modal-window" style="max-width:440px;">
-      <button class="modal-close-btn" onclick="authManager.closeModal()" aria-label="Close Auth Modal">✕</button>
-      <div style="text-align:center; margin-bottom:1.5rem;">
-        <span class="eyebrow">CLIENT PORTAL</span>
-        <h2 id="authModalTitle" style="font-size:1.75rem;">ATHLETE SIGN IN</h2>
-      </div>
-
-      <form id="authForm" onsubmit="authManager.handleSubmit(event)">
-        <div class="form-group" id="nameFieldGroup" style="display:none;">
-          <label class="form-label">Full Name</label>
-          <input type="text" id="authName" class="form-control" placeholder="Alex Rivera">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email Address</label>
-          <input type="email" id="authEmail" class="form-control" placeholder="alex@example.com" required>
-        </div>
-        <div class="form-group" id="phoneFieldGroup" style="display:none;">
-          <label class="form-label">Phone Number</label>
-          <input type="tel" id="authPhone" class="form-control" placeholder="+1 (555) 019-2834">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <input type="password" id="authPassword" class="form-control" placeholder="••••••••" required>
-        </div>
-        <button type="submit" class="btn btn-red" style="width:100%; margin-top:0.5rem;" id="authSubmitBtn">SIGN IN</button>
-      </form>
-
-      <div style="text-align:center; margin-top:1.25rem; font-size:0.84rem;">
-        <span id="authSwitchPrompt">New client?</span>
-        <a style="color:var(--red-primary); font-weight:700; cursor:pointer; margin-left:0.35rem;" id="authSwitchLink" onclick="authManager.toggleMode()">Create Account</a>
       </div>
     </div>
   </div>
@@ -662,7 +563,6 @@
       </ul>
       <div style="display:flex; flex-direction:column; gap:0.65rem;">
         <button class="btn btn-red" onclick="app.toggleMobileDrawer(); app.navigateTo('consultation')">BOOK A FREE CONSULTATION</button>
-        <button class="btn btn-outline" onclick="app.toggleMobileDrawer(); app.openClientPortal()">CLIENT PORTAL</button>
       </div>
     </div>
   </div>
@@ -676,7 +576,6 @@
   <script src="js/siteContent.js"></script>
   <script src="js/bookingService.js"></script>
   <script src="js/api.js"></script>
-  <script src="js/auth.js"></script>
 
   <script>
     function showToast(message, type = 'info') {
@@ -1082,43 +981,9 @@
 
       switchView(viewName) {
         document.getElementById('homeView').classList.toggle('active', viewName === 'home');
-        document.getElementById('clientPortalView').classList.toggle('active', viewName === 'portal');
         document.getElementById('adminView').classList.toggle('active', viewName === 'admin');
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (viewName === 'portal') this.renderPortalBookings();
         if (viewName === 'admin') this.renderAdminBookings();
-      },
-
-      openClientPortal() {
-        this.switchView('portal');
-      },
-
-      renderPortalBookings() {
-        const container = document.getElementById('portalBookingsContainer');
-        if (!container) return;
-
-        const user = window.authManager && window.authManager.currentUser;
-        const nameEl = document.getElementById('portalUserName');
-        const signInBtn = document.getElementById('portalSignInBtn');
-        if (user) {
-          if (nameEl) nameEl.textContent = user.name.split(' ')[0].toUpperCase();
-          if (signInBtn) signInBtn.style.display = 'none';
-        } else {
-          if (nameEl) nameEl.textContent = 'ATHLETE (DEMO)';
-          if (signInBtn) signInBtn.style.display = 'inline-flex';
-        }
-
-        const list = window.BookingService ? window.BookingService.getBookings() : [];
-        container.innerHTML = list.map(b => `
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; padding:1rem 1.25rem; background:var(--bg-charcoal); border:1px solid var(--border-card); border-left:3px solid var(--red-primary); border-radius:var(--radius-sm);">
-            <div>
-              <span style="font-size:0.72rem; font-weight:700; text-transform:uppercase; color:var(--red-primary);">${b.id || b.referenceCode} • ${b.trainingType || 'In-Person'}</span>
-              <h4 style="font-size:1.1rem; margin:0.15rem 0;">${b.programName}</h4>
-              <div style="font-size:0.84rem; color:var(--text-secondary);">${b.date} at ${b.time || b.timeSlot || '09:30 AM'} • Goal: ${b.goal || 'Strength'}</div>
-            </div>
-            <span class="glass-pill" style="border-color:var(--red-primary); color:#FFFFFF;">${b.status || 'Confirmed'}</span>
-          </div>
-        `).join('');
       },
 
       renderAdminBookings() {

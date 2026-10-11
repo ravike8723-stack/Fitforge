@@ -37,10 +37,6 @@ const SITE_CONTENT = {
       label: "BOOK A FREE CONSULTATION",
       target: "consultation",
     },
-    secondaryNavCta: {
-      label: "CLIENT PORTAL",
-      action: "portal",
-    },
   },
 
   // =========================================================================

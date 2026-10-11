@@ -17,7 +17,7 @@ FitForge is a premium, high-performance personal training and online coaching we
 - **Nutrition & Habits**: 4 essential pillars for sustainable progress.
 - **Athlete Testimonials & FAQ**: Client feedback and answers to common questions.
 - **6-Step Booking Wizard & Consultation Form**: Interactive session scheduler with local simulation (Demo Mode).
-- **Client Portal & Coach Admin Views**: Dedicated client progress tracking and coach roster consoles.
+- **Coach Admin View**: Dedicated trainer command center and roster console.
 
 ---
 
@@ -26,11 +26,10 @@ FitForge is a premium, high-performance personal training and online coaching we
 ```
 ├── index.html            # Main FitForge landing page
 ├── booking.html          # Standalone interactive coaching calendar
-├── dashboard.html        # Athlete progress portal
 ├── admin.html            # Coach roster & consultation administration
 ├── css/
 │   ├── glass.css         # Core Black + Red design system & layout styles
-│   ├── dashboard.css     # Modal & portal styles
+│   ├── dashboard.css     # Admin & modal styles
 │   └── styles.css        # Theme tokens
 ├── images/               # High-contrast fitness assets
 ├── js/
@@ -38,9 +37,8 @@ FitForge is a premium, high-performance personal training and online coaching we
 │   ├── bookingService.js # Provider-agnostic booking engine (Demo / LocalStorage)
 │   ├── icons.js          # Offline SVG icon system
 │   ├── api.js            # API client adapter
-│   ├── auth.js           # Client authentication manager
+│   ├── auth.js           # Session and user helper
 │   ├── booking.js        # Standalone booking flow controller
-│   ├── dashboard.js      # Portal controller
 │   └── admin.js          # Admin console controller
 ├── src/config/
 │   └── siteContent.js    # Node/ES module copy of site configuration
